@@ -1,4 +1,16 @@
-# Introduction
+# Project Name
+
+Shopping Mall Data Pipeline and Analytics
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Project Overview](#project-overview)
+- [Objectives](#objectives)
+- [Getting Started](#getting-started)
+- [Contributing](#contributing)
+
+## Introduction
 
 This project leverages randomly generated data, which constitutes a pivotal aspect of its execution. The rationale behind this approach stems from the unavailability of the specific dataset required for the project. Despite extensive efforts in searching for the requisite data, it became evident that creating our dataset was the most viable solution.
 
@@ -11,3 +23,25 @@ As the project unfolds, regular updates will be made, and additional information
 ## Project Overview
 
 This project aims to establish a data pipeline for a shopping mall, facilitating the seamless transfer of daily sales records from an OLTP database to an OLAP data warehouse for analytical purposes. The dataset for this endeavor will be simulated using a Python script, mirroring real-world shopping mall sales data as closely as possible.
+
+## Objectives
+
+- Create a data pipeline for transferring daily sales records from an OLTP database to an OLAP data warehouse.
+- Generate simulated sales data using a Python script to mimic real-world shopping mall sales.
+- Deepen understanding of data engineering fundamentals.
+- Gain proficiency in using various tools for data engineering and analytics.
+
+## Getting Started
+
+To get started with this project, follow these steps:
+
+1. Clone this repository to your local machine.
+2. Set up the required dependencies and environment.
+3. Execute the Python script for generating simulated sales data.
+4. Follow the documentation for setting up the data pipeline and analytics.
+
+## Contributing
+
+Contributions to this project are welcome. If you have suggestions, ideas, or want to collaborate, please open an issue or submit a pull request.
+
+
