@@ -6,7 +6,7 @@ Inputs:
 - product_ids: A dictionary mapping each product category to a list of product IDs within that category.
 - customer_ids: A list of customer IDs.
 - product_prices: A dictionary mapping each product ID to its fixed price.
-- num_transactions_per_day: The number of historical transactions to generate per day.
+- num_historical_transactions: The number of historical transactions to generate per day.
 
 Outputs:
 - Sorted DataFrame containing the historical transactions, with columns for sales ID, customer ID, category, product ID, quantity, unit price, sales amount, and timestamp.
@@ -28,8 +28,8 @@ product_ids = {
     "Health & Personal Care": ["H1", "H2", "H3", "H4"]
 }
 
-# Sample customer IDs
-customer_ids = [1001, 1002, 1003, 1004, 1005]
+# Create a list of customer IDs from 1 to 2000
+customer_ids = list(range(1, 2001))  # Assumes a 2000 customer base
 
 # Define fixed prices for each product ID
 product_prices = {
@@ -88,9 +88,34 @@ def generate_random_timestamp():
     return random_datetime
 
 
-def generate_historical_transactions(num_transactions_per_day):
+def generate_historical_transactions(num_historical_transactions):
+    """
+    Generates a specified number of historical transactions per day.
+
+    Args:
+        num_historical_transactions (int): The number of historical transactions to generate.
+
+    Returns:
+        None. The generated transactions are stored in the global DataFrame `df`.
+
+    Code Analysis:
+        - Initialize an empty list to store the transactions.
+        - For each transaction to be generated:
+            - Generate a random sales ID between 1000 and 9999.
+            - Select a random customer ID from the given list of customer IDs.
+            - Select a random product category from the given list of product categories.
+            - Select a random product ID within the selected category.
+            - Generate a random quantity between 1 and 5.
+            - Get the fixed price of the selected product ID.
+            - Calculate the sales amount by multiplying the unit price with the quantity.
+            - Generate a random timestamp within the specified date range.
+            - Create a dictionary with the transaction data.
+            - Append the transaction data dictionary to the list of transactions.
+        - Create a pandas DataFrame from the list of transactions.
+        - Make the DataFrame global.
+    """
     transactions = []
-    for _ in range(num_transactions_per_day):
+    for _ in range(num_historical_transactions):
         sales_id = random.randint(1000, 9999)
         customer_id = random.choice(customer_ids)
         category = random.choice(product_categories)
