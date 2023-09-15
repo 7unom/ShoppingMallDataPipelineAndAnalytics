@@ -88,11 +88,6 @@ def generate_random_timestamp():
     return random_datetime
 
 
-
-# Initialize an empty DataFrame
-columns = ["Sales ID", "Customer ID", "Category", "Product ID", "Quantity", "Unit Price", "Sales Amount", "Timestamp"]
-df = pd.DataFrame(columns=columns)
-
 def generate_historical_transactions(num_transactions_per_day):
     transactions = []
     for _ in range(num_transactions_per_day):
@@ -119,11 +114,11 @@ def generate_historical_transactions(num_transactions_per_day):
 
         transactions.append(transaction_data)
 
-    global df  # Use the global DataFrame
+    global df  # make df global
     df = pd.DataFrame(transactions)
 
 # Number of historical transactions to generate 
-num_historical_transactions = 500
+num_historical_transactions = 500 # target number should be >= 500000
 
 # Generate historical transactions
 generate_historical_transactions(num_historical_transactions)
