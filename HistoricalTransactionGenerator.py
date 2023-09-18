@@ -18,14 +18,15 @@ import datetime
 import pandas as pd
 
 # Sample product categories
-product_categories = ["Electronics", "Clothing", "Books", "Health & Personal Care"]
+product_categoryID = ["101", "102", "103", "104", "105"]
 
 # Sample product IDs within each category
 product_ids = {
-    "Electronics": ["E1", "E2", "E3", "E4"],
-    "Clothing": ["C1", "C2", "C3", "C4"],
-    "Books": ["B1", "B2", "B3", "B4"],
-    "Health & Personal Care": ["H1", "H2", "H3", "H4"]
+    "101": [1, 2, 3, 24 ],
+    "102": [4, 5, 6, 7],
+    "103": [8, 9, 10, 11, 18, 19, 20, 23],
+    "104": [12, 13, 14, 15],
+    "105": [16, 17, 21, 22,]
 }
 
 # Create a list of customer IDs from 1 to 2000
@@ -33,22 +34,30 @@ customer_ids = list(range(1, 2001))  # Assumes a 2000 customer base
 
 # Define fixed prices for each product ID
 product_prices = {
-    "E1": 199.99,
-    "E2": 149.99,
-    "E3": 99.99,
-    "E4": 79.99,
-    "C1": 49.99,
-    "C2": 39.99,
-    "C3": 29.99,
-    "C4": 19.99,
-    "B1": 12.99,
-    "B2": 14.99,
-    "B3": 9.99,
-    "B4": 11.99,
-    "H1": 149.99,
-    "H2": 99.99,
-    "H3": 69.99,
-    "H4": 119.99,
+    1: 999.99,
+    2: 599.99,
+    3: 799.99,
+    4: 599.99,
+    5: 43.99,
+    6: 79.99,
+    7: 1499.99,
+    8: 14.99,
+    9: 89.99,
+    10: 19.99,
+    11: 149.99,
+    12: 79.99,
+    13: 99.99,
+    14: 99.99,
+    15: 19.99,
+    16: 69.99,
+    17: 79.99,
+    18: 39.99,
+    19: 39.99,
+    20: 29.99,
+    21: 19.99,
+    22: 199.99,
+    23: 54.99,
+    24: 129.99
 }
 
 
@@ -105,7 +114,7 @@ def generate_historical_transactions(num_historical_transactions):
             - Select a random customer ID from the given list of customer IDs.
             - Select a random product category from the given list of product categories.
             - Select a random product ID within the selected category.
-            - Generate a random quantity between 1 and 5.
+            - Generate a random quantity between 1 and 5 except for products in category 102(between 1 and 2).
             - Get the fixed price of the selected product ID.
             - Calculate the sales amount by multiplying the unit price with the quantity.
             - Generate a random timestamp within the specified date range.
@@ -118,9 +127,12 @@ def generate_historical_transactions(num_historical_transactions):
     for _ in range(num_historical_transactions):
         sales_id = random.randint(1000, 9999)
         customer_id = random.choice(customer_ids)
-        category = random.choice(product_categories)
+        category = random.choice(product_categoryID)
         product_id = random.choice(product_ids[category])
-        quantity = random.randint(1, 5)
+        if category == "102":
+            quantity = random.randint(1, 2)
+        else:
+            quantity = random.randint(1, 5)
         unit_price = product_prices.get(product_id, 0)  # Get the fixed price for the product
         sales_amount = unit_price * quantity
         timestamp = generate_random_timestamp()
@@ -129,12 +141,12 @@ def generate_historical_transactions(num_historical_transactions):
         transaction_data = {
             "Sales ID": sales_id,
             "Customer ID": customer_id,
-            "Category": category,
+            # "Category": category,
             "Product ID": product_id,
             "Quantity": quantity,
-            "Unit Price": unit_price,
+            # "Unit Price": unit_price,
             "Sales Amount": sales_amount,
-            "Timestamp": timestamp
+            "DateTime": timestamp
         }
 
         transactions.append(transaction_data)
@@ -149,5 +161,5 @@ num_historical_transactions = 500 # target number should be >= 500000
 generate_historical_transactions(num_historical_transactions)
 
 # Print the DataFrame with all transactions
-df_sorted = df.sort_values(by=['Timestamp', 'Sales ID'], ignore_index=True)
-print(df_sorted.head())
+df_sorted = df.sort_values(by=['DateTime', 'Sales ID'], ignore_index=True)
+print(df_sorted)
