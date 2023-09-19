@@ -1,6 +1,8 @@
-import random
 import datetime
 import pandas as pd
+import numpy as np
+
+
 # Sample product categories
 product_categoryID = ["101", "102", "103", "104", "105"]
 
@@ -44,13 +46,17 @@ product_prices = {
     24: 129.99
 }
 
+# Define payment methods 
+payment_methods = ["Cash", "Card"]
+
+
 # Function to generate a random timestamp within a given date range
 def generate_random_daily_timestamp():
     # Get the current date
     current_date = datetime.date.today()
 
     # Generate a random number of seconds within the current day
-    random_seconds = random.randint(0, 86399)  # 86399 seconds in a day (0 to 23 hours, 59 minutes, 59 seconds)
+    random_seconds = np.random.randint(0, 86399)  # 86399 seconds in a day (0 to 23 hours, 59 minutes, 59 seconds)
 
     # Create a datetime object for the current date with the random time
     random_time = datetime.time(random_seconds // 3600, (random_seconds % 3600) // 60, random_seconds % 60)
@@ -59,20 +65,35 @@ def generate_random_daily_timestamp():
     return random_datetime
 
 
+# Function to generate unique sales IDs
+def generate_unique_sales_id():
+    used_ids = set()
+    for sales_id in range(1000, 9999):
+        if sales_id not in used_ids:
+            used_ids.add(sales_id)
+            yield sales_id
+
+# Create a generator for unique sales IDs
+sales_id_generator = generate_unique_sales_id()
+
+
 # Function to generate daily transactions
 def generate_daily_transactions(num_transactions_per_day):
     transaction = []
     for _ in range(num_transactions_per_day):
-        sales_id = random.randint(1000, 9999)
-        customer_id = random.choice(customer_ids)
-        category = random.choice(product_categoryID)
-        product_id = random.choice(product_ids[category])
-        if category == "102":
-            quantity = random.randint(1, 2)
+        sales_id = next(sales_id_generator)
+        customer_id = np.random.choice(customer_ids)
+        category = np.random.choice(product_categoryID)
+        product_id = np.random.choice(product_ids[category])
+        if category == "101":
+            quantity = np.random.randint(1, 2)
+        elif category == "102":
+            quantity = 1
         else:
-            quantity = random.randint(1, 5)
+            quantity = np.random.randint(1, 5)
         unit_price = product_prices.get(product_id, 0)  # Get the fixed unit_price for the product
-        sales_amount = unit_price * quantity
+        sales_amount = np.round(unit_price * quantity, decimals=2)
+        payment_method = np.random.choice(payment_methods)
         timestamp = generate_random_daily_timestamp()
 
         # Create a dictionary for the current transaction
@@ -82,25 +103,26 @@ def generate_daily_transactions(num_transactions_per_day):
             "Product ID": product_id,
             "Quantity": quantity,
             "Sales Amount": sales_amount,
+            "Payment Method": payment_method,
             "DateTime": timestamp
         }
 
         transaction.append(transaction_data)
-        # Append the transaction data as a new row to the DataFrame
-        global df  # Use the global DataFrame
-        df = pd.DataFrame(transaction)
-        
-        
+
+    # Create the DataFrame after the loop
+    df = pd.DataFrame(transaction)
+    return df
+
 
 # Number of transactions to generate daily
 min_target = 100
 max_target = 1000
-num_transactions_per_day = random.randint(min_target, max_target)
+num_transactions_per_day = np.random.randint(min_target, max_target)
 
-# Generate daily transactions
-generate_daily_transactions(num_transactions_per_day)
+# Generate daily transactions and assign the DataFrame to a variable
+df = generate_daily_transactions(num_transactions_per_day)
 
 # Print the DataFrame with all transactions
 df_sorted = df.sort_values(by=['DateTime', 'Sales ID'], ignore_index=True)
-print(df_sorted.head())
-
+# print(df_sorted.head())
+df_sorted.to_csv('DailyTransactions.csv', index=False)

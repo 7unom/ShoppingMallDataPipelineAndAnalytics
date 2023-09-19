@@ -13,9 +13,9 @@ Outputs:
 """
 
 
-import random
 import datetime
 import pandas as pd
+import numpy as np
 
 # Sample product categories
 product_categoryID = ["101", "102", "103", "104", "105"]
@@ -60,7 +60,8 @@ product_prices = {
     24: 129.99
 }
 
-
+# Define payment methods 
+payment_methods = ["Cash", "Card"]
 def generate_random_timestamp():
     """
     Generates a random timestamp within a specified date range.
@@ -86,16 +87,27 @@ def generate_random_timestamp():
     delta = end_date - start_date
 
     # Generate a random number of days within the entire date range
-    random_days = random.randint(0, delta.days)
+    random_days = np.random.randint(0, delta.days)
     
     # Generate a random number of seconds within the current day
-    random_seconds = random.randint(0, 86399)  # 86399 seconds in a day (0 to 23 hours, 59 minutes, 59 seconds)
+    random_seconds = np.random.randint(0, 86399)  # 86399 seconds in a day (0 to 23 hours, 59 minutes, 59 seconds)
 
     # Create a datetime object for the current date with the random time
     random_datetime = start_date + datetime.timedelta(days=random_days, seconds=random_seconds)
 
     return random_datetime
 
+
+# Function to generate unique sales IDs
+def generate_unique_sales_id():
+    used_ids = set()
+    for sales_id in range(1000, 9999):
+        if sales_id not in used_ids:
+            used_ids.add(sales_id)
+            yield sales_id
+
+# Create a generator for unique sales IDs
+sales_id_generator = generate_unique_sales_id()
 
 def generate_historical_transactions(num_historical_transactions):
     """
@@ -110,35 +122,35 @@ def generate_historical_transactions(num_historical_transactions):
     Code Analysis:
         - Initialize an empty list to store the transactions.
         - For each transaction to be generated:
-            - Generate a random sales ID between 1000 and 9999.
+            - Generate a random but unique sales ID between 1000 and 9999.
             - Select a random customer ID from the given list of customer IDs.
             - Select a random product category from the given list of product categories.
             - Select a random product ID within the selected category.
-            - Generate a random quantity between 1 and 5 except for products in category 102(between 1 and 2).
+            - Generate a random quantity between 1 and 5 except for products in category 101 and 102.
             - Get the fixed price of the selected product ID.
             - Calculate the sales amount by multiplying the unit price with the quantity.
             - Generate a random timestamp within the specified date range.
             - Create a dictionary with the transaction data.
             - Append the transaction data dictionary to the list of transactions.
         - Create a pandas DataFrame from the list of transactions.
-        - Make the DataFrame global.
     """
     transactions = []
     for _ in range(num_historical_transactions):
-        sales_id = random.randint(1000, 9999)
-        customer_id = random.choice(customer_ids)
-        category = random.choice(product_categoryID)
-        product_id = random.choice(product_ids[category])
+        sales_id = next(sales_id_generator)
+        customer_id = np.random.choice(customer_ids)
+        category = np.random.choice(product_categoryID)
+        product_id = np.random.choice(product_ids[category])
 
         # Determine the quantity of the product based on product category
-        if category == "102":
-            quantity = random.randint(1, 2)
-        elif category == "101":
+        if category == "101":
+            quantity = np.random.randint(1, 2)
+        elif category == "102":
             quantity = 1
         else:
-            quantity = random.randint(1, 5)
+            quantity = np.random.randint(1, 5)
         unit_price = product_prices.get(product_id, 0)  # Get the fixed price for the product
-        sales_amount = unit_price * quantity
+        sales_amount = np.round(unit_price * quantity, decimals=2)
+        payment_method = np.random.choice(payment_methods)
         timestamp = generate_random_timestamp()
 
         # Create a dictionary for the current transaction
@@ -150,20 +162,23 @@ def generate_historical_transactions(num_historical_transactions):
             "Quantity": quantity,
             # "Unit Price": unit_price,
             "Sales Amount": sales_amount,
+            "Payment Method": payment_method,
             "DateTime": timestamp
         }
 
         transactions.append(transaction_data)
 
-    global df  # make df global
+    # Create the DataFrame from the list of transactions
     df = pd.DataFrame(transactions)
+    return df
 
 # Number of historical transactions to generate 
 num_historical_transactions = 500 # target number should be >= 500000
 
 # Generate historical transactions
-generate_historical_transactions(num_historical_transactions)
+df =generate_historical_transactions(num_historical_transactions)
 
 # Print the DataFrame with all transactions
 df_sorted = df.sort_values(by=['DateTime', 'Sales ID'], ignore_index=True)
-print(df_sorted)
+# print(df_sorted)
+df_sorted.to_csv('HistoricalTransactions.csv', index=False)

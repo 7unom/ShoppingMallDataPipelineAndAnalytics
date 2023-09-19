@@ -2,3 +2,7 @@ __pycache__
 journal.txt
 todo
 test.py
+mysqlconnect.py
+import.py
+DailyTransactions.csv
+HistoricalTransactions.csv
