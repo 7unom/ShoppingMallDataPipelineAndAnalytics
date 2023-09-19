@@ -129,8 +129,12 @@ def generate_historical_transactions(num_historical_transactions):
         customer_id = random.choice(customer_ids)
         category = random.choice(product_categoryID)
         product_id = random.choice(product_ids[category])
+
+        # Determine the quantity of the product based on product category
         if category == "102":
             quantity = random.randint(1, 2)
+        elif category == "101":
+            quantity = 1
         else:
             quantity = random.randint(1, 5)
         unit_price = product_prices.get(product_id, 0)  # Get the fixed price for the product
