@@ -149,7 +149,7 @@ def generate_historical_transactions(num_historical_transactions):
         else:
             quantity = np.random.randint(1, 5)
         unit_price = product_prices.get(product_id, 0)  # Get the fixed price for the product
-        sales_amount = np.round(unit_price * quantity, decimals=2)
+        price = np.round(unit_price * quantity, decimals=2)
         payment_method = np.random.choice(payment_methods)
         timestamp = generate_random_timestamp()
 
@@ -157,11 +157,9 @@ def generate_historical_transactions(num_historical_transactions):
         transaction_data = {
             "Sales ID": sales_id,
             "Customer ID": customer_id,
-            # "Category": category,
             "Product ID": product_id,
             "Quantity": quantity,
-            # "Unit Price": unit_price,
-            "Sales Amount": sales_amount,
+            "Price": price,
             "Payment Method": payment_method,
             "DateTime": timestamp
         }
@@ -178,7 +176,5 @@ num_historical_transactions = 500 # target number should be >= 500000
 # Generate historical transactions
 df =generate_historical_transactions(num_historical_transactions)
 
-# Print the DataFrame with all transactions
-df_sorted = df.sort_values(by=['DateTime', 'Sales ID'], ignore_index=True)
-# print(df_sorted)
-df_sorted.to_csv('HistoricalTransactions.csv', index=False)
+# Sort transactions by date and sales ID
+historical_transactions = df.sort_values(by=['DateTime', 'Sales ID'], ignore_index=True)
