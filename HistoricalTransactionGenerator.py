@@ -1,5 +1,8 @@
 """
-Generates historical transactions by randomly selecting customer IDs, product categories, product IDs, quantities, and timestamps. Calculates the total amount for each transaction based on the fixed prices of the products. Stores the transactions in a pandas DataFrame and sorts them by timestamp and sales ID.
+Generates historical transactions by randomly selecting customer IDs,
+product categories, product IDs, quantities, and timestamps. 
+Calculates the total amount for each transaction based on the fixed prices of the products.
+ Stores the transactions in a pandas DataFrame and sorts them by timestamp and sales ID.
 
 Inputs:
 - product_categories: A list of product categories.
@@ -9,13 +12,18 @@ Inputs:
 - num_historical_transactions: The number of historical transactions to generate per day.
 
 Outputs:
-- Sorted DataFrame containing the historical transactions, with columns for sales ID, customer ID, category, product ID, quantity, unit price, sales amount, and timestamp.
+- Sorted DataFrame containing the historical transactions, with columns for sales ID, 
+customer ID, category, product ID, quantity, unit price, sales amount, and timestamp.
+
+Finally:
+- Write the file to an AWS S3 bucket
 """
 
 
 import datetime
 import pandas as pd
 import numpy as np
+from s3fs import S3FileSystem
 
 # Sample product categories
 product_categoryID = ["101", "102", "103", "104", "105"]
@@ -117,7 +125,7 @@ def generate_historical_transactions(num_historical_transactions):
         num_historical_transactions (int): The number of historical transactions to generate.
 
     Returns:
-        None. The generated transactions are stored in the global DataFrame `df`.
+        None. The generated transactions are stored in the DataFrame `df`.
 
     Code Analysis:
         - Initialize an empty list to store the transactions.
@@ -178,3 +186,31 @@ df =generate_historical_transactions(num_historical_transactions)
 
 # Sort transactions by date and sales ID
 historical_transactions = df.sort_values(by=['DateTime', 'Sales ID'], ignore_index=True)
+
+historical_transactions.to_csv('historical_transactions.csv', index=False)
+
+# Number of historical transactions to generate 
+num_historical_transactions = 500  # Update as needed
+
+if __name__ == "__main__":
+    try:
+        # Generate historical transactions and save to CSV
+        df = generate_historical_transactions(num_historical_transactions)
+        historical_transactions = df.sort_values(by=['DateTime', 'Sales ID'], ignore_index=True)
+        historical_transactions.to_csv('historical_transactions.csv', index=False)
+
+        # AWS S3 credentials
+        aws_access_key = ' YOUR ACCESS KEY'
+        aws_secret_key = ' YOUR SECRET KEY'
+        bucket_name = 'bucket name'
+        local_file_path = 'historical_transactions.csv'
+        s3_file_path = 'historical_transactions.csv'
+
+        # Upload the CSV file to S3
+        s3 = S3FileSystem(key=aws_access_key, secret=aws_secret_key)
+        with open(local_file_path, 'rb') as local_file:
+            with s3.open(f'{bucket_name}/{s3_file_path}', 'wb') as s3_file:
+                s3_file.write(local_file.read())
+        print(f'{local_file_path} uploaded to s3://{bucket_name}/{s3_file_path}')
+    except Exception as e:
+        print(f"Error generating historical transactions or uploading to S3: {str(e)}")

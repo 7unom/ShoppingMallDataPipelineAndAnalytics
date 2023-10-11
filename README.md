@@ -10,4 +10,6 @@ As the project unfolds, regular updates will be made, and additional information
 
 ## Project Overview
 
-This project aims to establish a data pipeline for a shopping mall, facilitating the seamless transfer of daily sales records from an OLTP database to an OLAP data warehouse for analytical purposes. The dataset for this endeavor will be simulated using a Python script, mirroring real-world shopping mall sales data as closely as possible.
+This project aims to establish a data pipeline for a shopping mall, facilitating the seamless transfer of daily sales records from a spread sheet to a  data warehouse for analytical purposes. The dataset for this endeavor will be simulated using a Python script, mirroring real-world shopping mall sales data as closely as possible.
+
+In this project, we are assisting a retail shopping mall in transitioning from storing their transaction data in spreadsheets to utilizing a data warehouse. This shift enables them to leverage the power of big data and analytics for making data-driven decisions, gaining a deeper understanding of their operations, and facilitating streamlined reporting processes.

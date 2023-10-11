@@ -92,7 +92,7 @@ def generate_daily_transactions(num_transactions_per_day):
         else:
             quantity = np.random.randint(1, 5)
         unit_price = product_prices.get(product_id, 0)  # Get the fixed unit_price for the product
-        sales_amount = np.round(unit_price * quantity, decimals=2)
+        price = np.round(unit_price * quantity, decimals=2)
         payment_method = np.random.choice(payment_methods)
         timestamp = generate_random_daily_timestamp()
 
@@ -102,7 +102,7 @@ def generate_daily_transactions(num_transactions_per_day):
             "Customer ID": customer_id,
             "Product ID": product_id,
             "Quantity": quantity,
-            "Sales Amount": sales_amount,
+            "Price": price,
             "Payment Method": payment_method,
             "DateTime": timestamp
         }
@@ -122,7 +122,5 @@ num_transactions_per_day = np.random.randint(min_target, max_target)
 # Generate daily transactions and assign the DataFrame to a variable
 df = generate_daily_transactions(num_transactions_per_day)
 
-# Print the DataFrame with all transactions
-df_sorted = df.sort_values(by=['DateTime', 'Sales ID'], ignore_index=True)
-# print(df_sorted.head())
-df_sorted.to_csv('DailyTransactions.csv', index=False)
+# sort transactions by date and sales ID
+daily_transactions = df.sort_values(by=['DateTime', 'Sales ID'], ignore_index=True)
