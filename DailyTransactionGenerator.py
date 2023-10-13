@@ -98,13 +98,13 @@ def generate_daily_transactions(num_transactions_per_day):
 
         # Create a dictionary for the current transaction
         transaction_data = {
-            "Sales ID": sales_id,
-            "Customer ID": customer_id,
-            "Product ID": product_id,
-            "Quantity": quantity,
-            "Price": price,
-            "Payment Method": payment_method,
-            "DateTime": timestamp
+            "sale_id": sales_id,
+            "customer_id": customer_id,
+            "product_id": product_id,
+            "quantity": quantity,
+            "amount_paid": price,
+            "payment_method": payment_method,
+            "timestamp": timestamp
         }
 
         transaction.append(transaction_data)
@@ -123,4 +123,4 @@ num_transactions_per_day = np.random.randint(min_target, max_target)
 df = generate_daily_transactions(num_transactions_per_day)
 
 # sort transactions by date and sales ID
-daily_transactions = df.sort_values(by=['DateTime', 'Sales ID'], ignore_index=True)
+daily_transactions = df.sort_values(by=['timestamp', 'sale_id'], ignore_index=True)

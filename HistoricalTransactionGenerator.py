@@ -163,13 +163,13 @@ def generate_historical_transactions(num_historical_transactions):
 
         # Create a dictionary for the current transaction
         transaction_data = {
-            "Sales ID": sales_id,
-            "Customer ID": customer_id,
-            "Product ID": product_id,
-            "Quantity": quantity,
-            "Price": price,
-            "Payment Method": payment_method,
-            "DateTime": timestamp
+            "sale_id": sales_id,
+            "customer_id": customer_id,
+            "product_id": product_id,
+            "quantity": quantity,
+            "amount_paid": price,
+            "payment_method": payment_method,
+            "timestamp": timestamp
         }
 
         transactions.append(transaction_data)
@@ -185,7 +185,7 @@ num_historical_transactions = 500 # target number should be >= 500000
 df =generate_historical_transactions(num_historical_transactions)
 
 # Sort transactions by date and sales ID
-historical_transactions = df.sort_values(by=['DateTime', 'Sales ID'], ignore_index=True)
+historical_transactions = df.sort_values(by=['timestamp', 'sale_id'], ignore_index=True)
 
 historical_transactions.to_csv('historical_transactions.csv', index=False)
 
@@ -196,7 +196,7 @@ if __name__ == "__main__":
     try:
         # Generate historical transactions and save to CSV
         df = generate_historical_transactions(num_historical_transactions)
-        historical_transactions = df.sort_values(by=['DateTime', 'Sales ID'], ignore_index=True)
+        historical_transactions = df.sort_values(by=['timestamp', 'sale_id'], ignore_index=True)
         historical_transactions.to_csv('historical_transactions.csv', index=False)
 
         # AWS S3 credentials
