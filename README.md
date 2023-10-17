@@ -24,4 +24,4 @@ In this project, we are assisting a retail shopping mall in transitioning from s
 
 ## Data Sources and Collection
 
-The data is sourced from the company's point-of-sale systems, capturing transaction details, sales, and customer interactions. However, the data was scripted using Python to generate this data. The script for this [HistoricalTransactionGenerator.py](HistoricalTransactionGenerator.py) can be found in the project repository.
+The data is sourced from the company's point-of-sale systems, capturing transaction details, sales, and customer interactions. However, the data was scripted using Python to generate this data. The script for this [HistoricalTransactionGenerator.py](HistoricalTransactionGenerator.py) can be found in the project repository. A sample of the raw data generated can be seen [here](historical_transactions.csv).
