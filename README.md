@@ -1,10 +1,6 @@
 # Introduction
 
-This project leverages randomly generated data, which constitutes a pivotal aspect of its execution. The rationale behind this approach stems from the unavailability of the specific dataset required for the project. Despite extensive efforts in searching for the requisite data, it became evident that creating our dataset was the most viable solution.
-
-It is imperative to ensure that the generated data doesn't overshadow the core objectives of this project. The primary goal is to deepen our understanding of data engineering fundamentals and gain proficiency in utilizing various tools integral to the project's execution.
-
-Moreover, I welcome any advice on optimizing this project, adhering to best practices, enhancing code quality, and selecting appropriate tools. Collaboration is another key facet, as I will be working alongside two friends who are student analysts, providing an opportunity to experience collaborative project work.
+This project aims to help a retail business gain valuable insights from its transaction data. By transforming raw data into meaningful metrics and Key Performance Indicators (KPIs), we provide the foundation for data-driven decision-making. The project utilizes AWS Redshift as the central data warehouse and AWS Glue for data integration.
 
 As the project unfolds, regular updates will be made, and additional information will be furnished.
 
@@ -13,3 +9,7 @@ As the project unfolds, regular updates will be made, and additional information
 This project aims to establish a data pipeline for a shopping mall, facilitating the seamless transfer of daily sales records from a spread sheet to a  data warehouse for analytical purposes. The dataset for this endeavor will be simulated using a Python script, mirroring real-world shopping mall sales data as closely as possible.
 
 In this project, we are assisting a retail shopping mall in transitioning from storing their transaction data in spreadsheets to utilizing a data warehouse. This shift enables them to leverage the power of big data and analytics for making data-driven decisions, gaining a deeper understanding of their operations, and facilitating streamlined reporting processes.
+
+## Data Sources and Collection
+
+The data is sourced from the company's point-of-sale systems, capturing transaction details, sales, and customer interactions. However, the data was scripted using Python to generate this data. The script for this [HistoricalTransactionGenerator.py](HistoricalTransactionGenerator.py) can be found in the project repository.
