@@ -32,7 +32,7 @@ The data is sourced from the company's point-of-sale systems, capturing transact
 
 This section of the project is dedicated to data transformation and ETL (Extract, Transform, Load) processes. These processes are essential for converting raw transaction data into actionable insights that can be used for analytics and decision-making.
 
-In this code snippet, [AWS Glue](code/aws-glue-etl-job.py) is the key tool used to manage the data ingestion and ETL operations. The data flow through the following steps:
+In this code snippet, [AWS Glue](Code/aws-glue-etl-job.py) is the key tool used to manage the data ingestion and ETL operations. The data flow through the following steps:
 
 1. **Creating a DynamicFrame from Catalog**: The code starts by creating a DynamicFrame from an S3 bucket (S3bucket_node1) using AWS Glue's capabilities. This DynamicFrame is based on a table in the 'retail-database' catalog.
 
