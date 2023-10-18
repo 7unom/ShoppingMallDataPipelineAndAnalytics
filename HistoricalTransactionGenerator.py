@@ -88,8 +88,8 @@ def generate_random_timestamp():
       and then creates a random timestamp using the selected values.
     """
     # Define the start and end dates for the date range
-    start_date = datetime.datetime(2023, 1, 1)
-    end_date = datetime.datetime(2023, 12, 31)
+    start_date = datetime.datetime(2022, 1, 1)
+    end_date = datetime.datetime(2023, 9, 30)
 
     # Calculate the duration (delta) between the start and end dates
     delta = end_date - start_date
@@ -109,7 +109,7 @@ def generate_random_timestamp():
 # Function to generate unique sales IDs
 def generate_unique_sales_id():
     used_ids = set()
-    for sales_id in range(1000, 9999):
+    for sales_id in range(100, 10000000):
         if sales_id not in used_ids:
             used_ids.add(sales_id)
             yield sales_id
@@ -179,18 +179,13 @@ def generate_historical_transactions(num_historical_transactions):
     return df
 
 # Number of historical transactions to generate 
-num_historical_transactions = 500 # target number should be >= 500000
+num_historical_transactions = 1000000 # target number should be >= 500000
 
 # Generate historical transactions
 df =generate_historical_transactions(num_historical_transactions)
 
 # Sort transactions by date and sales ID
 historical_transactions = df.sort_values(by=['timestamp', 'sale_id'], ignore_index=True)
-
-historical_transactions.to_csv('historical_transactions.csv', index=False)
-
-# Number of historical transactions to generate 
-num_historical_transactions = 500  # Update as needed
 
 if __name__ == "__main__":
     try:
