@@ -20,6 +20,10 @@ This project aims to establish a data pipeline for a shopping mall, facilitating
 
 In this project, we are assisting a retail shopping mall in transitioning from storing their transaction data in spreadsheets to utilizing a data warehouse. This shift enables them to leverage the power of big data and analytics for making data-driven decisions, gaining a deeper understanding of their operations, and facilitating streamlined reporting processes.
 
+## Architecture
+
+![Architecture.png](Images/Architecture.png)
+
 ## Data Sources and Collection
 
 The data is sourced from the company's point-of-sale systems, capturing transaction details, sales, and customer interactions. However, the data was scripted using Python to generate this data. The script for this [HistoricalTransactionGenerator.py](HistoricalTransactionGenerator.py) can be found in the project repository.
