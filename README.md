@@ -1,8 +1,10 @@
-# Introduction
+# Retail Data Pipeline and Analytics
+
+## Introduction
 
 This project aims to help a retail business gain valuable insights from its transaction data. By transforming raw data into meaningful metrics and Key Performance Indicators (KPIs), we provide the foundation for data-driven decision-making. The project utilizes AWS Redshift as the central data warehouse and AWS Glue for data integration.
 
-As the project unfolds, regular updates will be made, and additional information will be furnished.
+As the project unfolds, regular updates will be made, and additional information will be published.
 
 **Project Objectives**
 
@@ -78,11 +80,9 @@ It's essential to note that AWS Glue's serverless architecture streamlines data 
 
 This part of the project is pivotal for converting raw transaction data into a format that is suitable for further analysis. It ensures that the data is structured, cleaned, and loaded into the appropriate data store, enabling the generation of valuable insights for the retail business.
 
-
-
 ## Data Analysis and Insights
 
-The project has yielded insights into sales trends, customer behavior, and product performance, aiding in informed decision-making. A dashboard will be provided in due time.
+The project has yielded insights into sales trends, and product performance, aiding in informed decision-making. A dashboard will be provided in due time.
 
 ## References
 
