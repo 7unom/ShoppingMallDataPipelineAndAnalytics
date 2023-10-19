@@ -24,7 +24,7 @@ CREATE TABLE "public"."DimCategory" (
 CREATE TABLE "public"."DimProduct" (
     "product_id" SMALLINT NOT NULL,
     "product_name" VARCHAR(50) NOT NULL,
-    "description" CHARACTER VARYING(255),
+    "description" VARCHAR(255),
     "selling_price" DECIMAL(10, 2) NOT NULL,
     "cost_price" DECIMAL NOT NULL,
     "category_id" SMALLINT NOT NULL,
