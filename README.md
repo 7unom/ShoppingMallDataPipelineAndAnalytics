@@ -82,7 +82,36 @@ This part of the project is pivotal for converting raw transaction data into a f
 
 ## Data Analysis and Insights
 
-The project has yielded insights into sales trends, and product performance, aiding in informed decision-making. A dashboard will be provided in due time.
+The project has yielded insights into sales trends, and product performance, aiding in informed decision-making.
+
+### Dashboard
+
+![Retail-Dashboard.png](Images/Retail-Dashboard.png)
+
+### Report Summary
+
+1. **Total Sales Comparison:**
+   - In 2022, the total sales amounted to $200,062,194.34, surpassing the total sales in 2023, which were $148,983,517.70.
+
+2. **Monthly Contribution in 2023:**
+   - May 2023 sales constituted 4.91% of the total annual sales.
+
+3. **Average Sales Comparison:**
+   - The average monthly sales in 2022 were slightly higher at $16,671,849.53, compared to 2023, where they were $16,553,724.19.
+
+4. **Largest Divergence in September:**
+   - The most significant difference in total sales between 2022 and 2023 occurred in September, with 2022 exceeding 2023 by $445,175.96.
+
+5. **Product Sales Analysis:**
+   - Refrigerators led in total sales, reaching $74,864,500.90, which was 150.74% higher than Washing Machines, with total sales at $29,857,902.36.
+
+6. **Refrigerator Share of Sales:**
+   - Refrigerators contributed to 33.31% of the total sales.
+
+7. **Range of Product Sales:**
+   - Among the five product categories analyzed, total sales ranged from $941,731.76 to $2,492,513.12.
+
+More analysis into the store performance will be provided with time.
 
 ## References
 
