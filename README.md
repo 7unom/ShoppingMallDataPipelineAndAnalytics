@@ -86,7 +86,7 @@ The project has yielded insights into sales trends, and product performance, aid
 
 ### Dashboard
 
-![Retail-Dashboard.png](Images/Retail-Dashboard.png)
+![Retail-Dashboard.png](Images/Retail-Dashboard1.png)
 
 ### Report Summary
 
